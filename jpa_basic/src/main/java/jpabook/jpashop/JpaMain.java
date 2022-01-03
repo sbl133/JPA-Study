@@ -28,12 +28,22 @@ public class JpaMain {
             Order order = new Order();
             em.persist(order);
 
-            OrderItem orderItem = new OrderItem();
-            em.persist(orderItem);
+            OrderItem orderItem1 = new OrderItem();
+            OrderItem orderItem2 = new OrderItem();
+            em.persist(orderItem1);
+            em.persist(orderItem2);
 
-            order.addOrderItem(orderItem);
+            order.addOrderItem(orderItem1);
+            order.addOrderItem(orderItem2);
+            System.out.println("order = " + order.getOrderItems());
 
+            em.flush();
+            em.clear();
 
+            System.out.println("======================================");
+            Order findOrder = em.find(Order.class, order.getId());
+            System.out.println("======================================");
+            System.out.println("findOrder = " + findOrder.getOrderItems());
 
             tx.commit();
         } catch (Exception e){
