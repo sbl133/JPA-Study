@@ -1,5 +1,6 @@
 package jpabook.jpashop;
 
+import jpabook.jpashop.domain.Book;
 import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.domain.Order;
 import jpabook.jpashop.domain.OrderItem;
@@ -25,25 +26,10 @@ public class JpaMain {
 
         try{
 
-            Order order = new Order();
-            em.persist(order);
-
-            OrderItem orderItem1 = new OrderItem();
-            OrderItem orderItem2 = new OrderItem();
-            em.persist(orderItem1);
-            em.persist(orderItem2);
-
-            order.addOrderItem(orderItem1);
-            order.addOrderItem(orderItem2);
-            System.out.println("order = " + order.getOrderItems());
-
-            em.flush();
-            em.clear();
-
-            System.out.println("======================================");
-            Order findOrder = em.find(Order.class, order.getId());
-            System.out.println("======================================");
-            System.out.println("findOrder = " + findOrder.getOrderItems());
+            Book book = new Book();
+            book.setName("JPA");
+            book.setAuthor("영한띠");
+            em.persist(book);
 
             tx.commit();
         } catch (Exception e){
