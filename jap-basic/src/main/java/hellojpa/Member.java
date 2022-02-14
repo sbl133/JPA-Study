@@ -24,7 +24,7 @@ public class Member {
     private String username;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "TEAM_ID", updatable = false, insertable = false)
+    @JoinColumn(name = "TEAM_ID")
     private Team team;
 
     // 주소
