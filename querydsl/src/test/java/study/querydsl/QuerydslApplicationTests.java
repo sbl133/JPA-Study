@@ -34,5 +34,4 @@ class QuerydslApplicationTests {
 		assertThat(result).isEqualTo(hello);
 		assertThat(result.getId()).isEqualTo(hello.getId());
 	}
-
 }
