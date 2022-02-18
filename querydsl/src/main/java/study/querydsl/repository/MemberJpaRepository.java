@@ -13,15 +13,11 @@ import java.util.Optional;
 import static study.querydsl.entity.QMember.member;
 
 @Repository
+@RequiredArgsConstructor
 public class MemberJpaRepository {
 
     private final EntityManager em;
     private final JPAQueryFactory queryFactory;
-
-    public MemberJpaRepository(EntityManager em) {
-        this.em = em;
-        this.queryFactory = new JPAQueryFactory(em);
-    }
 
     public void save(Member member) {
         em.persist(member);
