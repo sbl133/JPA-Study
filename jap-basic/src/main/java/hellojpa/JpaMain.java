@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.locks.Lock;
 
 public class JpaMain {
     public static void main(String[] args) {
@@ -51,26 +52,54 @@ public class JpaMain {
             member4.setTeam(team2);
             em.persist(member4);
 
+            Locker locker1 = new Locker();
+            locker1.setName("락커1");
+            em.persist(locker1);
+
+            Locker locker2 = new Locker();
+            locker2.setName("락커2");
+            em.persist(locker2);
+
+            member1.setLocker(locker1);
+            member2.setLocker(locker2);
+
             em.flush();
             em.clear();
+//
+//            List<Member> members = em.createQuery("select m from Member m", Member.class)
+//                    .getResultList();
 
-            List<Member> members = em.createQuery("select m from Member m", Member.class)
+            List<Locker> lockers = em.createQuery("select l from Locker l", Locker.class)
                     .getResultList();
-            List<Team> teams = em.createQuery("select t from Team t", Team.class)
-                    .getResultList();
 
-            for (Member member : members) {
-                System.out.println("member = " + member);
-                System.out.println(member.getTeam());
-                System.out.println(member.getTeam().getName());
-            }
+//            for (Member member : members) {
+//                System.out.println(member);
+//                System.out.println(member.getLocker().getClass().getName());
+//                System.out.println(member.getLocker());
+//            }
 
+//            for (Locker locker : lockers) {
+//                System.out.println(locker.getName());
+//                System.out.println(locker.getMember().getClass().getName());
+//                System.out.println(locker.getMember());
+//            }
+//
+//            List<Member> members = em.createQuery("select m from Member m", Member.class)
+//                    .getResultList();
+//            List<Team> teams = em.createQuery("select t from Team t", Team.class)
+//                    .getResultList();
+//
 //            for (Team team : teams) {
 //                System.out.println("team = " + team);
 //                System.out.println(team.getMembers());
-//                System.out.println(team.getMembers().get(0).getUsername());
+//                System.out.println(team.getMembers().get(0).getClass().getName());
 //            }
-
+//
+//            for (Member member : members) {
+//                System.out.println("member = " + member);
+//                System.out.println(member.getTeam());
+//                System.out.println(member.getTeam().getName());
+//            }
 
 //            String query = "select distinct t from Team t join fetch t.members";
 //

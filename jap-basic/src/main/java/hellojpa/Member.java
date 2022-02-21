@@ -27,6 +27,10 @@ public class Member {
     @JoinColumn(name = "TEAM_ID")
     private Team team;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="LOCKER_ID")
+    private Locker locker;
+
     // 주소
     @Embedded
     private Address homeAddress;
@@ -94,4 +98,11 @@ public class Member {
         this.username = username;
     }
 
+    public Locker getLocker() {
+        return locker;
+    }
+
+    public void setLocker(Locker locker) {
+        this.locker = locker;
+    }
 }
