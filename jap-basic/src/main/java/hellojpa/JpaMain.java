@@ -65,12 +65,16 @@ public class JpaMain {
 
             em.flush();
             em.clear();
-//
+
+            em.createQuery("delete from Member m where m.username=:name")
+                    .setParameter("name", "관리자1")
+                    .executeUpdate();
+
 //            List<Member> members = em.createQuery("select m from Member m", Member.class)
 //                    .getResultList();
-
-            List<Locker> lockers = em.createQuery("select l from Locker l", Locker.class)
-                    .getResultList();
+//
+//            List<Locker> lockers = em.createQuery("select l from Locker l", Locker.class)
+//                    .getResultList();
 
 //            for (Member member : members) {
 //                System.out.println(member);
@@ -94,7 +98,7 @@ public class JpaMain {
 //                System.out.println(team.getMembers());
 //                System.out.println(team.getMembers().get(0).getClass().getName());
 //            }
-//
+
 //            for (Member member : members) {
 //                System.out.println("member = " + member);
 //                System.out.println(member.getTeam());
