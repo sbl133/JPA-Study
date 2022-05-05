@@ -27,6 +27,7 @@ import study.querydsl.entity.Team;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.querydsl.jpa.JPAExpressions.*;
@@ -57,10 +58,16 @@ public class QuerydslBasicTest {
 
         Member member3 = new Member("member3", 30, teamB);
         Member member4 = new Member("member4", 40, teamB);
+
+        Member member5 = new Member(null);
+
         em.persist(member1);
         em.persist(member2);
         em.persist(member3);
         em.persist(member4);
+        em.persist(member5);
+        em.flush();
+        em.clear();
     }
 
     @Test
@@ -708,6 +715,17 @@ public class QuerydslBasicTest {
         for (String s : result) {
             System.out.println("s = " + s);
         }
+    }
+
+    @Test
+    public void foreignKeyTest() {
+        List<Member> resultList = em.createQuery("select m from Member m where m.username is not null", Member.class)
+                .getResultList();
+        for (Member member1 : resultList) {
+            System.out.println("---------------------------");
+            System.out.println(member1.getUsername());
+        }
+
     }
     
 
