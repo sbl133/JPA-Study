@@ -66,9 +66,15 @@ public class JpaMain {
             em.flush();
             em.clear();
 
-            em.createQuery("delete from Member m where m.username=:name")
-                    .setParameter("name", "관리자1")
-                    .executeUpdate();
+            List<Team> teams = em.createQuery("select t from Team t", Team.class)
+                    .getResultList();
+
+            for (Team team : teams) {
+                List<Member> members = team.getMembers();
+                for (Member member : members) {
+                    System.out.println("member.getUsername() = " + member.getUsername());
+                }
+            }
 
 //            List<Member> members = em.createQuery("select m from Member m", Member.class)
 //                    .getResultList();
